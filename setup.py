@@ -52,14 +52,15 @@ setup(name='noclouddotnet',
         'stevedore',
       ],
       extras_require = {
-          'docs': [
-              'doc8',
-              'm2r2',
-              'sphinx',
-              'sphinx_git',
-              'sphinx_rtd_theme',
-              'sphinxcontrib.programoutput',
-          ],
+          # moved to requirements-docs.txt for readthedocs
+          #'docs': [
+          #    'doc8',
+          #    'm2r2',
+          #    'sphinx',
+          #    'sphinx_git',
+          #    'sphinx_rtd_theme',
+          #    'sphinxcontrib.programoutput',
+          #],
           'test': [
               'tox',
               'pytest-cov',
