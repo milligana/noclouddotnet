@@ -5,6 +5,8 @@ include VERSION.txt
 include setup.py
 include .gitignore
 include .readthedocs.yaml
+include requirements.txt
+include requirements-docs.txt
 include tox.ini
 include .bandit.yml
 include prospector.yaml
