@@ -23,7 +23,7 @@ something along the lines of the following:
 .. code-block::
    :caption: database setup
 
-    export FLASK_APP=noclouddotnet.cli
+    export FLASK_APP=noclouddotnet.app
     export FLASK_ENV=production
     export NOCLOUD_DOT_NET_SETTINGS=<path to settings.yaml>
     flask createdb

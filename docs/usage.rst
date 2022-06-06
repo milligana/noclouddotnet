@@ -51,5 +51,5 @@ configured paths for ``VENDOR_DATA``, ``USER_DATA``
 Phone home
 **********
 
-Cloud-init has a `phone home <https://cloudinit.readthedocs.io/en/latest/topics/modules.html#phone-home>`_ module which you can configure to point to your nocloudnet server to capture the data publishable by this mechanism.
+Cloud-init has a `phone home <https://cloudinit.readthedocs.io/en/latest/topics/modules.html#phone-home>`_ module which you can configure to point to your nocloud.net server to capture the data publishable by this mechanism.
 

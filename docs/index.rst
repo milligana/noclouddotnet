@@ -1,4 +1,4 @@
-Cloud-Init NoCloudDotNet Documentation
+Cloud-Init NoCloud.Net Documentation
 ######################################
 
 Cloud-init is the *industry standard* multi-distribution method for
@@ -14,15 +14,6 @@ Cloud instances are initialized from a disk image and instance data:
 
 NoCloudDotNet is a back-end for the `NoCloud Data Source <https://cloudinit.readthedocs.io/en/latest/topics/datasources/nocloud.html>`_.
 
-Getting help
-************
-
-Having trouble? We would like to help!
-
-- Ask a question in the ``#cloud-init`` IRC channel on Libera
-- Join and ask questions on the `cloud-init mailing list <https://launchpad.net/~cloud-init>`_
-- Find a bug? `Report bugs on Launchpad <https://bugs.launchpad.net/cloud-init/+filebug>`_
-
 .. toctree::
    :hidden:
    :titlesonly:
@@ -32,6 +23,7 @@ Having trouble? We would like to help!
    usage.rst
    plugins.rst
    api.rst
+   metrics.rst
    changelog.rst
 
 .. vi: textwidth=79

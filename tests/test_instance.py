@@ -30,14 +30,19 @@ from noclouddotnet.instance.routes import extmgr
 
 def test_00_extensions():
     assert extmgr.entry_points_names() == ['reversedns', 'simple']
+    assert extmgr.names() == ['reversedns', 'simple']
+    
+def test_01_extension_simple():
+    simple = extmgr['simple'].plugin
+    # cannot test this without an app context ...
 
-def test_01_user_data(test_client):
+def test_02_user_data(test_client):
     response = test_client.get('/user-data')
     assert response.status_code == 200
     assert response.text == ''
 
 # hmmm - non-fixture test ...
-def test_02_meta_data(test_client, init_database):
+def test_03_meta_data(test_client, init_database):
     response = test_client.get('/meta-data')
     assert response.status_code == 200
   

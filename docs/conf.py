@@ -31,6 +31,13 @@ logger = logging.getLogger(__name__)
 #sys.path.insert(0, os.path.abspath('./'))
 #sys.path.insert(0, os.path.abspath('.'))
 
+try:
+    from importlib.metadata import version as meta_version
+except:
+    from importlib_metadata import version as meta_version
+    
+version = meta_version('noclouddotnet')
+
 # allow flask commands to be run within the docs - alas still borked ...
 os.environ['FLASK_APP'] = 'noclouddotnet'
 os.environ['FLASK_ENV'] = 'test'
@@ -69,10 +76,6 @@ source_suffix = '.rst'
 # The master toctree document.
 master_doc = 'index'
 
-# The version info for the project you're documenting, acts as replacement for
-# |version| and |release|, also used in various other places throughout the
-# built documents.
-version = '1.0.0'
 release = version
 
 # Set the default Pygments syntax

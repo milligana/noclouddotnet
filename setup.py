@@ -20,7 +20,7 @@ with open('README.md') as fh:
     long_description = fh.read()
 
 setup(name='noclouddotnet',
-      version='1.0.1',
+      version='1.0.3',
       description='NoCloudNet Datasource/Metadata server for cloud-init',
       long_description=long_description,
       author='Alan Milligan',
@@ -49,6 +49,7 @@ setup(name='noclouddotnet',
         'Flask_Migrate',
         'dynaconf',
         'dnspython',
+        'prometheus-flask-exporter',
         'stevedore',
       ],
       extras_require = {
@@ -61,6 +62,10 @@ setup(name='noclouddotnet',
           #    'sphinx_rtd_theme',
           #    'sphinxcontrib.programoutput',
           #],
+          'jaeger': [
+              'Flask-OpenTracing',
+              'jaeger-client',
+              ],
           'test': [
               'tox',
               'pytest-cov',

@@ -4,3 +4,4 @@ sphinx
 sphinx_git
 sphinx_rtd_theme
 sphinxcontrib.programoutput
+stevedore

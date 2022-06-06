@@ -19,19 +19,25 @@ from datetime import datetime
 from flask import current_app, request
 from noclouddotnet.utils import yaml_response, read_file
 from noclouddotnet.models import Instance
-from noclouddotnet import db
+from noclouddotnet import db, metrics
+
 from stevedore import extension
 
 from . import instance_blueprint
 
-# TODO - stevadore ...
-from .instanceid import instance_id_hostname as instance_id_hostname_func
+from dynaconf import settings, Validator
 
-extmgr = extension.ExtensionManager(
+extidmgr = extension.ExtensionManager(
     namespace="noclouddotnet.instanceid",
+    propagate_map_exceptions=True,
     invoke_on_load=False,
 )
- 
+
+# Register validators
+settings.validators.register(
+    # Ensure some parameters exists (are required)
+    Validator('INSTANCEID', is_in=extidmgr.entry_points_names()),
+)
 
 @instance_blueprint.route('/meta-data', methods=['GET'])
 def meta_data():
@@ -43,8 +49,7 @@ def meta_data():
     """
     # hmmm - verify http headers (for via, x-forwarded-for etc)
     current_app.logger.info(str(request.environ.items()))
-    #iid, hostname = extmgr[current_app.config.id_function].map_method("instance_id_hostname", request)[0]
-    iid, hostname = instance_id_hostname_func(request)
+    iid, hostname = extidmgr[current_app.config.INSTANCEID].plugin(request=request)
     instance = Instance.query.filter_by(id=iid).first()
     if instance is None:
         instance = Instance(id=iid,
@@ -52,7 +57,7 @@ def meta_data():
                             first_contact=datetime.now(),
                             hostname=hostname,
                             type=current_app.config.INSTANCE_TYPE,
-                            count=1)
+                            count=0)
         db.session.add(instance)
         db.session.commit()
 
@@ -91,6 +96,8 @@ def vendor_data():
 def phone_home():
     """
     A cloud-init phone-home data/save.
+    The phone-home url should be /phone-home?instance_id=$INSTANCE_ID
+    Note that a phone-home call only happens once per cloud-instance.
 
     :returns: http return code
     """
@@ -103,11 +110,12 @@ def phone_home():
     now = datetime.now()
     # hmmm - this shouldn't happen ...
     if instance is None:
-        instance = Instance(id=instance_id_hostname_func(request.remote_addr)[0],
+        iid, hostname = extidmgr[current_app.config.INSTANCEID].plugin(request=request)
+        instance = Instance(id=iid,
                             remote_ip=request.remote_addr,
                             first_contact = now,
-                            type = 'vbox',
-                            count = 1)
+                            type = current_app.config.INSTANCE_TYPE,
+                            count = 0)
     data = {
         'hostname': form.get('hostname',''),
         'fqdn': form.get('fqdn',''),
@@ -117,6 +125,7 @@ def phone_home():
         'pub_key_rsa': form.get('pub_key_rsa',''),
         'pub_key_ecdsa': form.get('pub_key_ecdsa',''),
         'pub_key_ed25519': form.get('pub_key_ed25519',''),
+        'count': instance.count + 1
     }
     
     for k,v in data.items():
@@ -147,6 +156,7 @@ def fetch():
     return yaml_response(results)
 
 @instance_blueprint.route('/debug', methods=['GET'])
+@metrics.do_not_track()
 def debug():
     """
     Show debug info; from request.
