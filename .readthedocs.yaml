@@ -7,11 +7,14 @@ sphinx:
 sphinx:
    configuration: docs/conf.py
 
-# declare the Python requirements required to build your docs
+# The Python requirements required to build docs
 python:
    install:
    - requirements: requirements-docs.txt
-
+   - method: pip
+     path: .
+   system_package: true
+   
 formats:
   - pdf
   - epub
