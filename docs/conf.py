@@ -31,12 +31,15 @@ logger = logging.getLogger(__name__)
 #sys.path.insert(0, os.path.abspath('./'))
 #sys.path.insert(0, os.path.abspath('.'))
 
-try:
-    from importlib.metadata import version as meta_version
-except:
-    from importlib_metadata import version as meta_version
-    
-version = meta_version('noclouddotnet')
+# barfs on rtd ...
+#try:
+#    from importlib.metadata import version as meta_version
+#except:
+#    from importlib_metadata import version as meta_version
+#    
+#version = meta_version('noclouddotnet')
+with open('../VERSION.txt') as fh:
+    version = fh.read().strip()
 
 # allow flask commands to be run within the docs - alas still borked ...
 os.environ['FLASK_APP'] = 'noclouddotnet'

@@ -19,8 +19,11 @@ from setuptools import setup, find_packages
 with open('README.md') as fh:
     long_description = fh.read()
 
+with open('VERSION.txt') as fh:
+    version = fh.read().strip()
+
 setup(name='noclouddotnet',
-      version='1.0.3',
+      version=version,
       description='NoCloudNet Datasource/Metadata server for cloud-init',
       long_description=long_description,
       author='Alan Milligan',

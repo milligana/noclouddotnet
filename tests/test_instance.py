@@ -18,7 +18,7 @@
 import pytest
 from flask import url_for
 
-from noclouddotnet.instance.routes import extmgr
+from noclouddotnet.instance.routes import extidmgr
 
 #@pytest.mark.usefixtures('client_class')
 #class TestSuite:
@@ -29,11 +29,11 @@ from noclouddotnet.instance.routes import extmgr
 #    assert response.status_code == 200
 
 def test_00_extensions():
-    assert extmgr.entry_points_names() == ['reversedns', 'simple']
-    assert extmgr.names() == ['reversedns', 'simple']
+    assert extidmgr.entry_points_names() == ['reversedns', 'simple']
+    assert extidmgr.names() == ['reversedns', 'simple']
     
 def test_01_extension_simple():
-    simple = extmgr['simple'].plugin
+    simple = extidmgr['simple'].plugin
     # cannot test this without an app context ...
 
 def test_02_user_data(test_client):
