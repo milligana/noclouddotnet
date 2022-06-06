@@ -13,7 +13,7 @@ python:
    - requirements: requirements-docs.txt
    - method: pip
      path: .
-   system_package: true
+   system_packages: true
    
 formats:
   - pdf
