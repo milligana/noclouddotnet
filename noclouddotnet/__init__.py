@@ -63,12 +63,17 @@ ENVVAR_PREFIX_DYNACONF = 'NOCLOUD_NET'
 #  foo: 1
 ENVVAR_FOR_DYNACONF = 'NOCLOUD_NET_SETTINGS'
 
-# hmmm - not sure if we can configure this ...
-INSTANCE_PATH = '/var/lib/noclouddotnet'
 
+# hmmm - dynamic application arguments - for those that cannot be set via settings ...
+app_args = {}
+
+# set up production/linux filesystem hierarchy - or fallback to Flask default
+# for unprivileged users (eg rtd)
+if os.path.exists('/var/lib') and os.access('/var/lib', os.W_OK):
+    app_args['instance_path'] = '/var/lib/noclouddotnet'
 
 def create_app():
-    app = Flask(__name__, instance_path=INSTANCE_PATH)
+    app = Flask(__name__, **app_args)
 
     # ensure instance folder exists
     # TODO - only necessary for file-system based storages (ie not pgsql)
