@@ -1,8 +1,8 @@
 # (rtd) docs needs wheel/metadata - so we publish to pypi before building rtd
-noclouddotnet
+# noclouddotnet
 doc8
 m2r2
-sphinx
+sphinx>=3.5.4
 sphinx_git
 sphinx_rtd_theme
 sphinxcontrib.programoutput
