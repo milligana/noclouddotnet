@@ -20,4 +20,5 @@ from flask import Blueprint
 
 instance_blueprint = Blueprint('instance', __name__)
 
-from . import routes
+# TODO - do we need to import to register routes ...
+# from . import routes

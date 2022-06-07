@@ -19,7 +19,7 @@
 __doc__ = """
 command line interface for NoCloud.Net
 
-currently used to create/migrate RDBMS
+currently used to create RDBMS without generating migrations etc
 """
 
 from noclouddotnet import create_app, db
@@ -50,4 +50,4 @@ app.cli.add_command(create_db)
 
 if __name__ == '__main__':
     app.run()
-
+    

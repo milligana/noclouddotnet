@@ -103,7 +103,7 @@ def phone_home():
     """
     form = dict(list(request.form.items()) + list(request.args.items()))
     if not form.get('instance_id', None):
-        current_app.logger.error('phone-home: no instance_id from %s' % request.remote_addr)
+        current_app.logger.error('phone-home: no instance_id from {}'.format(request.remote_addr))
         return yaml_response({'message': 'no instance_id'}, 400)
 
     instance = Instance.query.filter_by(id=form['instance_id']).first()

@@ -1,4 +1,5 @@
--r requirements.txt
+# (rtd) docs needs wheel/metadata - so we publish to pypi before building rtd
+noclouddotnet
 doc8
 m2r2
 sphinx

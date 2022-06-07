@@ -53,9 +53,9 @@ def instance_id_hostname(request=None):
             if len(domain) and domain[-1] == '.':
                 domain = domain[:-1]
 
-    iid = '%s-%s' % (hostname, uuid.uuid4().hex[-12:])
+    iid = '{}-{}'.format(hostname, uuid.uuid4().hex[-12:])
     if domain:
-        return iid, "%s.%s" % (hostname, domain)
+        return iid, "{}.{}".format(hostname, domain)
     return iid, hostname
 
 
@@ -66,10 +66,10 @@ def instance_id_hostname_simple(request=None):
     :param request: flask request object
     :returns: instance id, hostname tuple
     """
-    iid = 'A-%s' % uuid.uuid4().hex[-12:]
+    iid = 'A-{}'.format(uuid.uuid4().hex[-12:])
     domain = current_app.config.DOMAIN
 
     if domain:
-        return iid, "%s.%s" % (iid, domain)
+        return iid, "{}.{}".format(iid, domain)
  
     return iid, iid

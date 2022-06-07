@@ -19,14 +19,9 @@ from setuptools import setup, find_packages
 with open('README.md') as fh:
     long_description = fh.read()
 
-with open('VERSION.txt') as fh:
-    version = fh.read().strip()
-
-with open('requirements.txt') as fh:
-    install_requires = fh.readlines()
     
 setup(name='noclouddotnet',
-      version=version,
+      version='1.0.5',
       description='NoCloudNet Datasource/Metadata server for cloud-init',
       long_description=long_description,
       author='Alan Milligan',
@@ -49,7 +44,15 @@ setup(name='noclouddotnet',
       ],
       packages=find_packages(exclude=['ez_setup']),
       include_package_data=True,
-      install_requires=install_requires,
+      install_requires=[
+          'Flask>=2.0',
+          'PyYAML',
+          'Flask_Migrate',
+          'dynaconf',
+          'dnspython',
+          'prometheus-flask-exporter',
+          'stevedore',
+          ],
       extras_require = {
           # moved to requirements-docs.txt for readthedocs
           #'docs': [

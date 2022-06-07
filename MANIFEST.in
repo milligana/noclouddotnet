@@ -5,7 +5,6 @@ include VERSION.txt
 include setup.py
 include .gitignore
 include .readthedocs.yaml
-include requirements.txt
 include requirements-docs.txt
 include tox.ini
 include .bandit.yml
@@ -14,6 +13,7 @@ include docs/plugins.rst
 include docs/changelog.rst
 include docs/installation.rst
 include docs/usage.rst
+include docs/metrics.rst
 include docs/conf.py
 include docs/api.rst
 include docs/index.rst
